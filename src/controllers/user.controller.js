@@ -258,7 +258,7 @@ return res.status(200)
 .json(new ApiResponse(200,user,"Account details updated successfully"))
 })
 
-const UpdateUserAvatar=asyncHandler(async (req,res)=> {
+const updateUserAvatar=asyncHandler(async (req,res)=> {
    const  avatarLocalPath= req.file?.path
 if(!avatarLocalPath){
   throw new ApiError(400,"Avatar file is missing")
@@ -282,7 +282,7 @@ new:true
  .json(new ApiResponse(200,user,"Avatar updated successfully"))
 })
 
-const UpdateUserCoverImage=asyncHandler(async (req,res)=> {
+const updateUserCoverImage=asyncHandler(async (req,res)=> {
   const  coverImageLocalPath= req.file?.path
 if(!coverImageLocalPath){
  throw new ApiError(400,"cover image file is missing")
@@ -424,8 +424,8 @@ export {
   changeCurrentPassword,
   getCurrentUser,
   updateAccountDetails,
-  UpdateUserCoverImage,
-  UpdateUserAvatar,
+  updateUserCoverImage,
+  updateUserAvatar,
   getUserChannelProfile,
   getWatchHistory
 }
