@@ -201,15 +201,15 @@ const refreshAccessToken = asyncHandler(async (req,res)=>{
     }
  
    const {accessToken,newRefreshToken} = await generateAccessAndRefreshTokens(user._id)
-    return res.status(200
-     .cookies("accessToken",accessToken,options)
-     .cookies("refreshToken",newRefreshToken,options)
+    return res.status(200)
+     .cookie("accessToken",accessToken,options)
+     .cookie("refreshToken",newRefreshToken,options)
      .json(
        200,
        {accessToken, refreshToken:newRefreshToken},
        "Access token refreshed"
      )
-    )
+    
  } catch (error) {
   throw new ApiError(401, error?.message || "Invalid refresh token")
  }
@@ -308,6 +308,7 @@ res.status(200)
 
 const getUserChannelProfile = asyncHandler(async (req,res)=>{
   const {username} = req.params
+console.log(username);
 
   if(!username?.trim()){
     throw new ApiError(400,"Username is missing")
@@ -411,9 +412,9 @@ const getUserChannelProfile = asyncHandler(async (req,res)=>{
       }
     }
   ])
-  return res.status(200
+  return res.status(200)
     .json(new ApiResponse(200,user[0].watchHistory,"Watch history fetched successfully"))
-  )
+  
  })
 
 export {
