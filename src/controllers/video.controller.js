@@ -102,7 +102,8 @@ const publishAVideo = asyncHandler(async (req, res) => {
     if ([title, description].some((field) => field?.trim() === "")) {
         throw new ApiError(400, "All fields are required");
     }
-
+    console.log(req.files);
+    
     const videoFileLocalPath = req.files?.videoFile[0].path;
     const thumbnailLocalPath = req.files?.thumbnail[0].path;
 
@@ -117,6 +118,10 @@ const publishAVideo = asyncHandler(async (req, res) => {
     const videoFile = await uploadOnCloudinary(videoFileLocalPath);
     const thumbnail = await uploadOnCloudinary(thumbnailLocalPath);
 
+    console.log("videofile = "+ videoFile);
+    console.log("thumbnail = "+thumbnail);
+    
+    
     if (!videoFile) {
         throw new ApiError(400, "Video file not found");
     }
@@ -171,7 +176,7 @@ const getVideoById = asyncHandler(async (req, res) => {
     const video = await Video.aggregate([
         {
             $match:{
-                _id : new mongoose.Types.ObjectId()
+                _id : new mongoose.Types.ObjectId(videoId)
             }
         },
         {
@@ -258,8 +263,8 @@ const getVideoById = asyncHandler(async (req, res) => {
                 isLiked: 1
             }
         }
-    ])
-
+    ]);
+    
     if (!video) {
         throw new ApiError(500, "failed to fetch video");
     }
@@ -277,7 +282,7 @@ const getVideoById = asyncHandler(async (req, res) => {
             watchHistory: videoId
         }
     });
-
+    //console.log(video);
     return res
     .status(200)
     .json(

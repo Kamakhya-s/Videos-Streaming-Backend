@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 const userSchema = new Schema({
     username: {
         type: String,
-        required: true,
+        required: [true,"username is required"],
         unique: true,
         lowercase: true,
         index: true,
@@ -19,25 +19,30 @@ const userSchema = new Schema({
 
     email: {
         type: String,
-        required: true,
+        required:  [true, 'email is required'],
         unique: true,
         lowercase: true,
         trim: true
     },
     fullName: {
         type: String,
-        required:true,
+        required:[true,"fullname is required"],
         lowercase: true,
         trim: true,
         index: true,
     },
     avatar: {
-        type: String, //clodinary url
+        type: {
+            public_id: String,
+            url: String 
+        },
         required: true,
     },
     coverImage: {
-        type: String,
-
+        type: {
+            public_id: String,
+            url: String
+        },
     },
     password: {
         type: String,
@@ -45,8 +50,7 @@ const userSchema = new Schema({
 
     },
     refreshToken: {
-        type: String,
-
+        type: String
     },
 }, { timestamps: true })
 
@@ -57,8 +61,8 @@ userSchema.pre("save",async function(next){
     next()
 })
 
-userSchema.methods.isPasswordCorrect=async function (password) {
-  return await  bcrypt.compare(password,this.password)
+userSchema.methods.isPasswordCorrect=async function (newPassword) {
+  return await  bcrypt.compare(newPassword,this.password)
 }
 
 userSchema.methods.generateAccessToken=async function () {

@@ -1,5 +1,5 @@
 import { v2 as cloudinary } from 'cloudinary';
-import fs from "fs"
+import { rimraf } from 'rimraf';
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -19,12 +19,13 @@ const uploadOnCloudinary=async (localFilePath)=>{
         //uploaded file
        // console.log("File uploaded :",response.url);
      
-       fs.unlinkSync(localFilePath)
+      // fs.unlinkSync(localFilePath);
+      rimraf.moveRemove(localFilePath);
         return response;
 
     } catch (error) {
-        fs.unlinkSync(localFilePath) //fail in upload, hence delete file from server
-        return null;
+        rimraf.moveRemove(localFilePath); //fail in upload, hence delete file from server
+        return error;
     }
 }
 
@@ -38,8 +39,8 @@ const deleteOnCloudinary = async (public_id, resource_type="image") => {
             resource_type: `${resource_type}`
         });
     } catch (error) {
-        return error;
         console.log("delete on cloudinary failed", error);
+        return error;
     }
 };
    

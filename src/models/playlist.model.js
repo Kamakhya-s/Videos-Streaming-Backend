@@ -4,13 +4,13 @@ import {Schema} from "mongoose"
 const playlistSchema = new Schema({
     name:{
         type:String,
-        required:true
+        required:[true,"name is required"]
     },
     description:{
         type:String,
-        required:true
+        required:[true,"description is required"]
     },
-    video:[{
+    videos:[{
         type: Schema.Types.ObjectId,
         ref: "Video"
     }],
@@ -22,4 +22,4 @@ const playlistSchema = new Schema({
     timestamps:true
 })
 
-export const Playlist= new mongoose.model("Playlist",playlistSchema)
+export const Playlist=  mongoose.model("Playlist",playlistSchema)

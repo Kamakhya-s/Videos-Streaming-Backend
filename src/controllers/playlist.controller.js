@@ -3,6 +3,7 @@ import {Playlist} from "../models/playlist.model.js"
 import {ApiError} from "../utils/apiError.js"
 import {ApiResponse} from "../utils/apiResponse.js"
 import {asyncHandler} from "../utils/asyncHandler.js"
+import { Video } from "../models/video.model.js"
 
 
 const createPlaylist = asyncHandler(async (req, res) => {
@@ -169,7 +170,10 @@ const addVideoToPlaylist = asyncHandler(async (req, res) => {
     if (!isValidObjectId(playlistId) || !isValidObjectId(videoId)) {
         throw new ApiError(400, "Invalid PlaylistId or videoId");
     }
-
+    console.log(playlistId);
+    console.log(videoId);
+    
+    
     const playlist = await Playlist.findById(playlistId);
     const video = await Video.findById(videoId);
 
