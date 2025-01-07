@@ -22,6 +22,10 @@ app.use(cookieParser());
 
 app.use(morgan("dev"));
 
+app.get("/",(req,res)=>{
+    res.json({message: "hello from backend"})
+})
+
 
 //routes import
 import userRouter from "./routes/user.routes.js"
