@@ -50,9 +50,7 @@ app.use(cookieParser());
 
 app.use(morgan("dev"));
 
-app.use("/", (req, res) => {
-  res.send({ message: "Welcome to youtube-twitter" });
-});
+
 
 
 //routes import
