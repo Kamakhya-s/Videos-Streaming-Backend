@@ -9,7 +9,7 @@ and also combines the tweet functionality from twitter into it. Find more about 
 
 | Content            | Link                                                                        |
 | -------------------| ----------------------------------------------------------------------------|
-| API Documentation  | [click here]([https://web.postman.co/workspace/8056f36a-8618-469c-80ae-52b0054588b5/collection/31426435-6e85f092-86d0-46a2-8f24-721e524ad7cc](https://technical-geoscientist-84212716-s-team.postman.co/workspace/My-Workspace~8056f36a-8618-469c-80ae-52b0054588b5/collection/31426435-6e85f092-86d0-46a2-8f24-721e524ad7cc?action=share&creator=31426435)](https://documenter.getpostman.com/view/31426435/2sBYApzDUn))    |
+| API Documentation  | [click here](https://documenter.getpostman.com/view/31426435/2sBYApzDUn)    |
 | Model              | [click here ](https://app.eraser.io/workspace/YtPqZ1VogxGy1jzIDkzj)         |
 
 ## Features
