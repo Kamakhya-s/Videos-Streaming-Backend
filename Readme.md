@@ -2,14 +2,14 @@
 
 ## Introduction
 
-This is a ``YOUTUBE + TWITTER`` backend project that covers allmost the functionalities of youtube 
-and also combines the tweet functionality from twitter into it. Find more about his project in the documentaion below.
+This is a ``YOUTUBE + TWITTER`` backend project that covers almost the functionalities of youtube 
+and also combines the tweet functionality from twitter into it. Find more about his project in the documentation below.
 
 ## Important links
 
 | Content            | Link                                                                        |
 | -------------------| ----------------------------------------------------------------------------|
-| API Documentation  | [click here](https://web.postman.co/workspace/8056f36a-8618-469c-80ae-52b0054588b5/collection/31426435-6e85f092-86d0-46a2-8f24-721e524ad7cc)    |
+| API Documentation  | [click here]([https://web.postman.co/workspace/8056f36a-8618-469c-80ae-52b0054588b5/collection/31426435-6e85f092-86d0-46a2-8f24-721e524ad7cc](https://technical-geoscientist-84212716-s-team.postman.co/workspace/My-Workspace~8056f36a-8618-469c-80ae-52b0054588b5/collection/31426435-6e85f092-86d0-46a2-8f24-721e524ad7cc?action=share&creator=31426435))    |
 | Model              | [click here ](https://app.eraser.io/workspace/YtPqZ1VogxGy1jzIDkzj)         |
 
 ## Features
