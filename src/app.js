@@ -63,7 +63,20 @@ import commentRouter from "./routes/comment.routes.js"
 import subscriptionRouter from "./routes/subscription.routers.js"
 import dashboardRouter from "./routes/dashboard.routes.js"
 import healthcheckRouter from "./routes/healthcheck.routers.js"
+import { ApiResponse } from "./utils/apiResponse.js"
 
+app.get("/", (req, res) => {
+    return res.status(200).json(
+        new ApiResponse(
+            200,
+            {
+                healthcheck: "/api/v1/healthcheck",
+                version: "v1"
+            },
+            "Video Streaming Backend API is running successfully"
+        )
+    );
+});
 
 app.use("/api/v1/users",userRouter) 
 app.use("/api/v1/comment", commentRouter);
