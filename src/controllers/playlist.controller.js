@@ -152,12 +152,13 @@ const getPlaylistById = asyncHandler(async (req, res) => {
                 owner: {
                     username: 1,
                     fullName: 1,
-                    "avatar.url": 1
+                    avatar: 1
                 }
             }
         }
         
     ]);
+console.log(playlistVideos[0]);
 
     return res
         .status(200)

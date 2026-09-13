@@ -136,6 +136,8 @@ const loginUser = asyncHandler(async (req, res) => {
           throw new ApiError(401, "Invalid user credentials");
         }
 
+        const isProduction = process.env.NODE_ENV === 'production';
+
       const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(
         user._id
       );
@@ -146,8 +148,8 @@ const loginUser = asyncHandler(async (req, res) => {
 
       const options = {
         httpOnly: true,
-        secure: true,
-        sameSite: "None"
+        secure: isProduction,
+        sameSite: isProduction ? 'None' : 'Lax'
       };
 
       return res
@@ -179,9 +181,11 @@ const logoutUser = asyncHandler(async (req, res) => {
           new: true,
         }
       );
+      const isProduction = process.env.NODE_ENV === 'production';
+
       const options = {
         httpOnly: true,
-        secure: true,
+        secure: isProduction,
       };
 
       return res
@@ -197,10 +201,10 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
   if (!incomingRefreshToken) {
       throw new ApiError(401, "unauthorized request");
   }
-console.log(incomingRefreshToken);
-console.log(req.cookies);
+//console.log(incomingRefreshToken);
+//console.log(req.cookies);
 
-
+const isProduction = process.env.NODE_ENV === 'production';
   const user = await User.findOne({
       refreshToken: incomingRefreshToken
   });
@@ -213,8 +217,8 @@ console.log(req.cookies);
 
   const options = {
       httpOnly: true,
-      secure: true,
-      sameSite: "None"
+     secure: false,
+        sameSite: isProduction ? 'None' : 'Lax'
   };
 
   return res
@@ -247,13 +251,13 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
         .json(new ApiResponse(200, {}, "Password changed successfully"));
     });
 
-    const getCurrentUser = asyncHandler(async (req, res) => {
+const getCurrentUser = asyncHandler(async (req, res) => {
       return res
         .status(200)
         .json(new ApiResponse(200, req.user, "Current user fetched successfully"));
     });
 
-    const updateAccountDetails = asyncHandler(async (req, res) => {
+const updateAccountDetails = asyncHandler(async (req, res) => {
       const { fullName, email } = req.body;
       if (!(fullName || email)) {
         throw new ApiError(400, "All fields required");
@@ -269,7 +273,7 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
         {
           new: true,
         }
-      ).select("-password");
+      ).select("-password -refreshToken");
 
       return res
         .status(200)
@@ -361,7 +365,7 @@ const updateUserCoverImage = asyncHandler(async (req, res) => {
 
 const getUserChannelProfile = asyncHandler(async (req, res) => {
       const { username } = req.params;
-      console.log(username);
+      console.log("username="+username);
 
       if (!username?.trim()) {
         throw new ApiError(400, "Username is missing");
@@ -422,6 +426,7 @@ const getUserChannelProfile = asyncHandler(async (req, res) => {
       if (!channel.length) {
         throw new ApiError("404", "channel does not exists");
       }
+console.log(JSON.stringify(channel, null, 2));
 
       return res
         .status(200)
