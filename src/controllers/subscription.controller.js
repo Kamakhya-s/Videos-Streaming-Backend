@@ -45,6 +45,7 @@ const getUserChannelSubscribers = asyncHandler(async (req, res) => {
     if(!isValidObjectId(channelId)){
         throw new ApiError(400,"Invalid channelId")
     }
+//console.log("channelId"+channelId);
 
     const subscribers=  await Subscription.aggregate([
         {
@@ -99,13 +100,14 @@ const getUserChannelSubscribers = asyncHandler(async (req, res) => {
                     _id: 1,
                     username: 1,
                     fullName: 1,
-                    "avatar.url": 1,
+                    avatar: 1,
                     subscribedToSubscriber: 1,
                     subscribersCount: 1,
                 },
             },
         }
     ])
+//console.log("subscribers :=="+subscribers);
 
     return res.status(200)
     .json(
@@ -161,7 +163,7 @@ const getSubscribedChannels = asyncHandler(async (req, res) => {
                     _id: 1,
                     username: 1,
                     fullName: 1,
-                    "avatar.url": 1,
+                    avatar: 1,
                     latestVideo: {
                         _id: 1,
                         "videoFile.url": 1,

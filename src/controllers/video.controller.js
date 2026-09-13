@@ -69,7 +69,7 @@ const getAllVideos = asyncHandler(async (req, res) => {
                     {
                         $project: {
                             username: 1,
-                            "avatar.url": 1
+                            avatar: 1
                         }
                     }
                 ]
@@ -88,7 +88,7 @@ const getAllVideos = asyncHandler(async (req, res) => {
     };
 
     const video = await Video.aggregatePaginate(videoAggregate, options);
-
+   // console.log(video.docs[0]);
     return res
         .status(200)
         .json(new ApiResponse(200, video, "Videos fetched successfully"));
@@ -102,7 +102,7 @@ const publishAVideo = asyncHandler(async (req, res) => {
     if ([title, description].some((field) => field?.trim() === "")) {
         throw new ApiError(400, "All fields are required");
     }
-    console.log(req.files);
+   // console.log(req.files);
     
     const videoFileLocalPath = req.files?.videoFile[0].path;
     const thumbnailLocalPath = req.files?.thumbnail[0].path;
@@ -224,7 +224,7 @@ const getVideoById = asyncHandler(async (req, res) => {
                     {
                         $project: {
                             username: 1,
-                            "avatar.url": 1,
+                            avatar: 1,
                             subscribersCount: 1,
                             isSubscribed: 1
                         }
